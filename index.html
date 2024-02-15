@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Image Browser</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    /* Optional styling */
+    .thumbnail {
+      width: 100%;
+      height: auto;
+
+    }
+    .related-media img {
+      width: 20%;
+      height: auto;
+      cursor: pointer;
+      margin-bottom: 10px;
+      /* border: 2px solid black   ; */
+      border-radius: 10px   ;
+    }
+    /* .related-media .img-container img {
+      width: 30%;
+      height: auto;
+      cursor: pointer;
+    } */
+    .related-media img:hover {
+      border: 2px solid #007bff;
+  
+    }
+  </style>
+</head>
+<body>
+
+<div class="container mt-4 mb-4">
+  <!-- <h2 class="mt-4 mb-4"></h2> -->
+  <div class="row">
+    <div class="col-md-3">
+      <h5></h5>
+      <div id="relatedMedia" class="related-media">
+        <!-- Related media will be appended here dynamically -->
+      </div>
+    </div>
+    <div class="col-md-5 rounded-4 ">
+      <img id="mainImage" src="https://m.media-amazon.com/images/I/61IGuaA1T7L._SL1500_.jpg" class="thumbnail img-fluid mb-3">
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+  // Sample main image URL 
+  const mainImageURL = "https://m.media-amazon.com/images/I/61IGuaA1T7L._SL1500_.jpg";
+
+  // Sample related media URLs 
+  const relatedMedia = [
+    "https://m.media-amazon.com/images/I/61IGuaA1T7L._SL1500_.jpg",
+    "https://m.media-amazon.com/images/I/71WhxTeQVlL._SL1500_.jpg",
+    "https://m.media-amazon.com/images/I/71yTpJFwaHL._SL1500_.jpg",
+    "https://m.media-amazon.com/images/I/71dfBRQmjSL._SL1500_.jpg",
+    "https://m.media-amazon.com/images/I/712-nRQOAWL._SL1500_.jpg",
+    "https://m.media-amazon.com/images/I/61zWbe2+EbL._SL1500_.jpg"
+  ];
+
+  // Function to load related media
+  function loadRelatedMedia() {
+    const relatedMediaContainer = document.getElementById('relatedMedia');
+    relatedMediaContainer.innerHTML = ''; // Clear existing media
+
+    relatedMedia.forEach(mediaURL => {
+        const container = document.createElement('div');
+      container.classList.add('img-container');
+      const img = document.createElement('img');
+      img.src = mediaURL;
+      img.classList.add('thumbnail');
+      // Add click listener to load media into main image
+      img.addEventListener('click', () => {
+        document.getElementById('mainImage').src = mediaURL;
+      });
+      container.appendChild(img);
+      relatedMediaContainer.appendChild(container);
+    });
+  }
+
+  // Load related media on page load
+  window.onload = loadRelatedMedia;
+</script>
+
+</body>
+</html>
